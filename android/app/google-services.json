@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "324279814634",
+    "firebase_url": "https://mercadoartesao-1bdbb.firebaseio.com",
+    "project_id": "mercadoartesao-1bdbb",
+    "storage_bucket": "mercadoartesao-1bdbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324279814634:android:a5b3a835ca7566ed",
+        "android_client_info": {
+          "package_name": "br.com.luciano.mercadoartesao"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "324279814634-7vv3c03j1jcilmjgimb08h6vuk784r3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1jBrXQJNAaxu8WpyS9kAVp7Wx8UEI66o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "324279814634-7vv3c03j1jcilmjgimb08h6vuk784r3m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
