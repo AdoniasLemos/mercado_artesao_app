@@ -4,7 +4,6 @@ import 'package:mercado_artesao/models/user_model.dart';
 import 'package:mercado_artesao/screens/login_screen.dart';
 import 'package:mercado_artesao/tiles/drawer_tile.dart';
 
-
 class CustomDrawer extends StatelessWidget {
 
   final PageController pageController;
