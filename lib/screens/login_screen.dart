@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mercado_artesao/models/user_model.dart';
 import 'package:mercado_artesao/screens/signup_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -16,30 +17,33 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  bool isLoggedIn = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.grey,
         key: _scaffoldKey,
-        appBar: AppBar(
-          title: Text("Entrar"),
-          centerTitle: true,
-          actions: <Widget>[
-            FlatButton(
-              child: Text(
-                "CRIAR CONTA",
-                style: TextStyle(
-                    fontSize: 15.0
-                ),
-              ),
-              textColor: Colors.white,
-              onPressed: (){
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context)=>SignUpScreen())
-                );
-              },
-            )
-          ],
-        ),
+        // appBar: AppBar(
+        //   title: Text("Entrar"),
+        //   centerTitle: true,
+        //   actions: <Widget>[
+        //     FlatButton(
+        //       child: Text(
+        //         "CRIAR CONTA",
+        //         style: TextStyle(
+        //             fontSize: 15.0
+        //         ),
+        //       ),
+        //       textColor: Colors.white,
+        //       onPressed: (){
+        //         Navigator.of(context).pushReplacement(
+        //             MaterialPageRoute(builder: (context)=>SignUpScreen())
+        //         );
+        //       },
+        //     )
+        //   ],
+        // ),
         body: ScopedModelDescendant<UserModel>(
           builder: (context, child, model){
             if(model.isLoading)
@@ -50,57 +54,17 @@ class _LoginScreenState extends State<LoginScreen> {
               child: ListView(
                 padding: EdgeInsets.all(16.0),
                 children: <Widget>[
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                        hintText: "E-mail"
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (text){
-                      if(text.isEmpty || !text.contains("@")) return "E-mail inválido!";
-                    },
-                  ),
-                  SizedBox(height: 16.0,),
-                  TextFormField(
-                    controller: _passController,
-                    decoration: InputDecoration(
-                        hintText: "Senha"
-                    ),
-                    obscureText: true,
-                    validator: (text){
-                      if(text.isEmpty || text.length < 6) return "Senha inválida!";
-                    },
-                  ),
                   Align(
-                    alignment: Alignment.centerRight,
-                    child: FlatButton(
-                      onPressed: (){
-                        if(_emailController.text.isEmpty)
-                          _scaffoldKey.currentState.showSnackBar(
-                              SnackBar(content: Text("Insira seu e-mail para recuperação!"),
-                                backgroundColor: Colors.redAccent,
-                                duration: Duration(seconds: 2),
-                              )
-                          );
-                        else {
-                          model.recoverPass(_emailController.text);
-                          _scaffoldKey.currentState.showSnackBar(
-                              SnackBar(content: Text("Confira seu e-mail!"),
-                                backgroundColor: Theme
-                                    .of(context)
-                                    .primaryColor,
-                                duration: Duration(seconds: 2),
-                              )
-                          );
-                        }
-                      },
-                      child: Text("Esqueci minha senha",
-                        textAlign: TextAlign.right,
+                    alignment: Alignment.center,
+                    child: RaisedButton(
+                      onPressed: () => initiateFacebookLogin(),
+                      child: Text("Entrar com Facebook",
+                        textAlign: TextAlign.center,
                       ),
                       padding: EdgeInsets.zero,
                     ),
                   ),
-                  SizedBox(height: 16.0,),
+                  SizedBox(height: 20),
                   SizedBox(
                     height: 44.0,
                     child: RaisedButton(
@@ -144,5 +108,29 @@ class _LoginScreenState extends State<LoginScreen> {
         )
     );
   }
+  void onLoginStatusChanged(bool isLoggedIn) {
+    setState(() {
+      this.isLoggedIn = isLoggedIn;
+    });
+  }
 
+void initiateFacebookLogin() async {
+    var facebookLogin = FacebookLogin();
+    var facebookLoginResult =
+        await facebookLogin.logInWithReadPermissions(['email']);
+     switch (facebookLoginResult.status) {
+      case FacebookLoginStatus.error:
+        print("Error");
+        onLoginStatusChanged(false);
+        break;
+      case FacebookLoginStatus.cancelledByUser:
+        print("CancelledByUser");
+        onLoginStatusChanged(false);
+        break;
+      case FacebookLoginStatus.loggedIn:
+        print("LoggedIn");
+        onLoginStatusChanged(true);
+        break;
+    }
+  }
 }

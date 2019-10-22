@@ -19,6 +19,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_facebook_login: ^1.1.1
   font_awesome_flutter: ^8.5.0
   flutter_staggered_grid_view: "^0.3.0"
   cloud_firestore:
