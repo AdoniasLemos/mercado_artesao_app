@@ -7,7 +7,6 @@ import 'package:mercado_artesao/tabs/products_tab.dart';
 import 'package:mercado_artesao/widgets/cart_button.dart';
 
 class HomeScreen extends StatelessWidget {
-
   final _pageController = PageController();
 
   @override
@@ -23,7 +22,8 @@ class HomeScreen extends StatelessWidget {
         ),
         Scaffold(
           appBar: AppBar(
-            title: Text("Comprar"),
+            title: Text("Categorias"),
+            backgroundColor: Colors.blueAccent,
             centerTitle: true,
           ),
           drawer: CustomDrawer(_pageController),
@@ -31,15 +31,12 @@ class HomeScreen extends StatelessWidget {
           floatingActionButton: CartButton(),
         ),
         Scaffold(
-          appBar: AppBar(
-            title: Text("Anunciar"),
-            centerTitle: true,
-          ),
           body: PlacesTab(),
           drawer: CustomDrawer(_pageController),
         ),
         Scaffold(
           appBar: AppBar(
+            backgroundColor: Colors.blueAccent,
             title: Text("Meus Pedidos"),
             centerTitle: true,
           ),

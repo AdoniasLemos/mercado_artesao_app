@@ -29,11 +29,10 @@ class HomeTab extends StatelessWidget {
             SliverAppBar(
               floating: true,
               snap: true,
-              backgroundColor: Colors.transparent,
+              backgroundColor: Colors.blueAccent,
               elevation: 0.0,
               flexibleSpace: FlexibleSpaceBar(
-                title: const Text("Artesanato"),
-                centerTitle: true,
+                title: const Text("Mercado Artesão"),
               ),
             ),
             FutureBuilder<QuerySnapshot>(
