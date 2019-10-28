@@ -31,6 +31,11 @@ class HomeScreen extends StatelessWidget {
           floatingActionButton: CartButton(),
         ),
         Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.lightBlue,
+            title: Text('Minhas Vendas')
+            ,
+          ),
           body: PlacesTab(),
           drawer: CustomDrawer(_pageController),
         ),

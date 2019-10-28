@@ -1,22 +1,20 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mercado_artesao/tiles/place_tile.dart';
 
 class PlacesTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<QuerySnapshot>(
-      future: Firestore.instance.collection("places").getDocuments(),
-      builder: (context, snapshot){
-        if(!snapshot.hasData)
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        else
-          return ListView(
-            children: snapshot.data.documents.map((doc) => PlaceTile(doc)).toList(),
-          );
-      },
+    return  Scaffold(
+      body: Container(
+        padding: EdgeInsets.all(16.0),
+        alignment: Alignment.center,
+        child: Column(
+//          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('500,00', style: TextStyle(color: Colors.lightBlue, fontSize: 64.0),),
+            Text('VENDAS', style: TextStyle(color: Colors.lightBlue, fontSize: 14.0,)),
+          ],
+        ),
+      ),
     );
   }
 }
