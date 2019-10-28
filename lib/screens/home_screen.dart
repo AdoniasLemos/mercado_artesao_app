@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mercado_artesao/tabs/home_tab.dart';
 import 'package:mercado_artesao/widgets/custom_drawer.dart';
 import 'package:mercado_artesao/tabs/orders_tab.dart';
-import 'package:mercado_artesao/tabs/places_tab.dart';
+import 'package:mercado_artesao/tabs/seller_tab.dart';
 import 'package:mercado_artesao/tabs/products_tab.dart';
 import 'package:mercado_artesao/widgets/cart_button.dart';
 
