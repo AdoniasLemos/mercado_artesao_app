@@ -10,7 +10,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
@@ -23,75 +22,77 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        appBar: AppBar(
-          title: Text("Criar Conta"),
-          centerTitle: true,
-        ),
         body: ScopedModelDescendant<UserModel>(
-          builder: (context, child, model){
-            if(model.isLoading)
-              return Center(child: CircularProgressIndicator(),);
+          builder: (context, child, model) {
+            if (model.isLoading)
+              return Center(
+                child: CircularProgressIndicator(),
+              );
 
             return Form(
               key: _formKey,
               child: ListView(
                 padding: EdgeInsets.all(16.0),
                 children: <Widget>[
+                  SizedBox(
+                    height: 50.0,
+                  ),
                   TextFormField(
                     controller: _nameController,
-                    decoration: InputDecoration(
-                        hintText: "Nome Completo"
-                    ),
-                    validator: (text){
-                      if(text.isEmpty) return "Nome Inválido!";
+                    decoration: InputDecoration(hintText: "Nome Completo"),
+                    validator: (text) {
+                      if (text.isEmpty) return "Nome Inválido!";
                     },
                   ),
-                  SizedBox(height: 16.0,),
+                  SizedBox(
+                    height: 16.0,
+                  ),
                   TextFormField(
                     controller: _emailController,
-                    decoration: InputDecoration(
-                        hintText: "E-mail"
-                    ),
+                    decoration: InputDecoration(hintText: "E-mail"),
                     keyboardType: TextInputType.emailAddress,
-                    validator: (text){
-                      if(text.isEmpty || !text.contains("@")) return "E-mail inválido!";
+                    validator: (text) {
+                      if (text.isEmpty || !text.contains("@"))
+                        return "E-mail inválido!";
                     },
                   ),
-                  SizedBox(height: 16.0,),
+                  SizedBox(
+                    height: 16.0,
+                  ),
                   TextFormField(
                     controller: _passController,
-                    decoration: InputDecoration(
-                        hintText: "Senha"
-                    ),
+                    decoration: InputDecoration(hintText: "Senha"),
                     obscureText: true,
-                    validator: (text){
-                      if(text.isEmpty || text.length < 6) return "Senha inválida!";
+                    validator: (text) {
+                      if (text.isEmpty || text.length < 6)
+                        return "Senha inválida!";
                     },
                   ),
-                  SizedBox(height: 16.0,),
+                  SizedBox(
+                    height: 16.0,
+                  ),
                   TextFormField(
                     controller: _addressController,
-                    decoration: InputDecoration(
-                        hintText: "Endereço"
-                    ),
-                    validator: (text){
-                      if(text.isEmpty) return "Endereço inválido!";
+                    decoration: InputDecoration(hintText: "Endereço"),
+                    validator: (text) {
+                      if (text.isEmpty) return "Endereço inválido!";
                     },
                   ),
-                  SizedBox(height: 16.0,),
+                  SizedBox(
+                    height: 16.0,
+                  ),
                   SizedBox(
                     height: 44.0,
-                    child: RaisedButton(
-                      child: Text("Criar Conta",
+                    child: FlatButton(
+                      child: Text(
+                        "Criar Conta",
                         style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 15.0,
                         ),
                       ),
-                      textColor: Colors.white,
-                      color: Theme.of(context).primaryColor,
-                      onPressed: (){
-                        if(_formKey.currentState.validate()){
-
+                      textColor: Colors.blueAccent,
+                      onPressed: () {
+                        if (_formKey.currentState.validate()) {
                           Map<String, dynamic> userData = {
                             "name": _nameController.text,
                             "email": _emailController.text,
@@ -102,40 +103,46 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               userData: userData,
                               pass: _passController.text,
                               onSuccess: _onSuccess,
-                              onFail: _onFail
-                          );
+                              onFail: _onFail);
                         }
                       },
                     ),
+                  ),
+                  SizedBox(
+                    height: 100.0,
+                    child: FlatButton(
+                        child: Text(
+                          "Voltar",
+                          style: TextStyle(fontSize: 15.0),
+                        ),
+                        textColor: Colors.blueAccent,
+                        onPressed: () {
+                          Navigator.pop(context);
+                        }),
                   ),
                 ],
               ),
             );
           },
-        )
-    );
+        ));
   }
 
-  void _onSuccess(){
-    _scaffoldKey.currentState.showSnackBar(
-        SnackBar(content: Text("Usuário criado com sucesso!"),
-          backgroundColor: Theme.of(context).primaryColor,
-          duration: Duration(seconds: 2),
-        )
-    );
-    Future.delayed(Duration(seconds: 2)).then((_){
+  void _onSuccess() {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text("Usuário criado com sucesso!"),
+      backgroundColor: Theme.of(context).primaryColor,
+      duration: Duration(seconds: 2),
+    ));
+    Future.delayed(Duration(seconds: 2)).then((_) {
       Navigator.of(context).pop();
     });
   }
 
-  void _onFail(){
-    _scaffoldKey.currentState.showSnackBar(
-        SnackBar(content: Text("Falha ao criar usuário!"),
-          backgroundColor: Colors.redAccent,
-          duration: Duration(seconds: 2),
-        )
-    );
+  void _onFail() {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text("Falha ao criar usuário!"),
+      backgroundColor: Colors.redAccent,
+      duration: Duration(seconds: 2),
+    ));
   }
-
 }
-
