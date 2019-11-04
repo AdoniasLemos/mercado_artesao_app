@@ -8,28 +8,14 @@ class CustomDrawer extends StatelessWidget {
 
   final PageController pageController;
 
+  bool showSellers = false;
   CustomDrawer(this.pageController);
 
   @override
   Widget build(BuildContext context) {
-
-    Widget _buildDrawerBack() => Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [
-                Color.fromARGB(255, 203, 236, 241),
-                Colors.white
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter
-          )
-      ),
-    );
-
     return Drawer(
       child: Stack(
         children: <Widget>[
-          // _buildDrawerBack(),
           ListView(
             padding: EdgeInsets.only(left: 32.0, top: 16.0),
             children: <Widget>[
@@ -51,6 +37,9 @@ class CustomDrawer extends StatelessWidget {
                         bottom: 0.0,
                         child: ScopedModelDescendant<UserModel>(
                           builder: (context, child, model){
+                            if(model.userData["role"] && model.userData["role"]=="seller"){
+                              showSellers = true;
+                            }
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
@@ -89,13 +78,13 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ),
               Divider(),
-              DrawerTile(Icons.home, "Início", pageController, 0),
+              DrawerTile(Icons.home, "Início", pageController, 0, true),
               Divider(),
-              DrawerTile(Icons.list, "Categorias", pageController, 1),
+              DrawerTile(Icons.list, "Categorias", pageController, 1, true),
               Divider(),
-              DrawerTile(Icons.store, "Minhas Vendas", pageController, 2),
+              DrawerTile(Icons.store, "Minhas Vendas", pageController, 2, showSellers),
               Divider(),
-              DrawerTile(Icons.shopping_basket, "Meus Pedidos", pageController, 3),
+              DrawerTile(Icons.shopping_basket, "Meus Pedidos", pageController, 3, true),
             ],
           )
         ],
