@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mercado_artesao/tabs/home_tab.dart';
 import 'package:mercado_artesao/widgets/custom_drawer.dart';
 import 'package:mercado_artesao/tabs/orders_tab.dart';
-import 'package:mercado_artesao/tabs/places_tab.dart';
+import 'package:mercado_artesao/tabs/seller_tab.dart';
 import 'package:mercado_artesao/tabs/products_tab.dart';
 import 'package:mercado_artesao/widgets/cart_button.dart';
 
 class HomeScreen extends StatelessWidget {
-
   final _pageController = PageController();
 
   @override
@@ -23,7 +22,8 @@ class HomeScreen extends StatelessWidget {
         ),
         Scaffold(
           appBar: AppBar(
-            title: Text("Comprar"),
+            title: Text("Categorias"),
+            backgroundColor: Colors.blueAccent,
             centerTitle: true,
           ),
           drawer: CustomDrawer(_pageController),
@@ -32,14 +32,16 @@ class HomeScreen extends StatelessWidget {
         ),
         Scaffold(
           appBar: AppBar(
-            title: Text("Anunciar"),
-            centerTitle: true,
+            backgroundColor: Colors.lightBlue,
+            title: Text('Minhas Vendas')
+            ,
           ),
           body: PlacesTab(),
           drawer: CustomDrawer(_pageController),
         ),
         Scaffold(
           appBar: AppBar(
+            backgroundColor: Colors.blueAccent,
             title: Text("Meus Pedidos"),
             centerTitle: true,
           ),
