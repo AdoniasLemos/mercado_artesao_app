@@ -38,7 +38,7 @@ class OrdersTab extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Icon(Icons.view_list,
-              size: 80.0, color: Theme.of(context).primaryColor,),
+              size: 80.0, color: Colors.lightBlue,),
             SizedBox(height: 16.0,),
             Text("Faça o login para acompanhar!",
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
@@ -48,7 +48,7 @@ class OrdersTab extends StatelessWidget {
             RaisedButton(
               child: Text("Entrar", style: TextStyle(fontSize: 18.0),),
               textColor: Colors.white,
-              color: Theme.of(context).primaryColor,
+              color: Colors.lightBlue,
               onPressed: (){
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (context)=>LoginScreen())

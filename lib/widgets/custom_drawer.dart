@@ -29,7 +29,7 @@ class CustomDrawer extends StatelessWidget {
     return Drawer(
       child: Stack(
         children: <Widget>[
-          _buildDrawerBack(),
+          // _buildDrawerBack(),
           ListView(
             padding: EdgeInsets.only(left: 32.0, top: 16.0),
             children: <Widget>[
@@ -43,7 +43,7 @@ class CustomDrawer extends StatelessWidget {
                       top: 8.0,
                       left: 0.0,
                       child: Text("Mercado\nArtesão",
-                        style: TextStyle(fontSize: 34.0, color: Color.fromRGBO(255,75, 41, 100), fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 34.0, color: Colors.blueAccent, fontWeight: FontWeight.bold),
                       ),
                     ),
                     Positioned(
@@ -93,7 +93,7 @@ class CustomDrawer extends StatelessWidget {
               Divider(),
               DrawerTile(Icons.list, "Categorias", pageController, 1),
               Divider(),
-              DrawerTile(Icons.store, "Anunciar", pageController, 2),
+              DrawerTile(Icons.store, "Minhas Vendas", pageController, 2),
               Divider(),
               DrawerTile(Icons.shopping_basket, "Meus Pedidos", pageController, 3),
             ],
