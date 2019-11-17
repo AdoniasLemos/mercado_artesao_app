@@ -19,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Colors.lightBlue[400],
         body: ScopedModelDescendant<UserModel>(
           builder: (context, child, model) {
             if (model.isLoading)
@@ -33,11 +33,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: EdgeInsets.all(16.0),
                 children: <Widget>[
                   SizedBox(
-                    height: 350.0,
+                    width: 28.0,
+                    height: 12.0,
+                    child: Image.asset("assets/logo.png"),
+                  ),
+                  SizedBox(
+
+                    height: 100.0,
                   ),
                   TextFormField(
                     controller: _emailController,
-                    decoration: InputDecoration(hintText: "E-mail"),
+                    decoration: InputDecoration(
+                        hintText: "E-mail", fillColor: Colors.white),
                     keyboardType: TextInputType.emailAddress,
                     validator: (text) {
                       if (text.isEmpty || !text.contains("@"))

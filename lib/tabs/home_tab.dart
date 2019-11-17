@@ -1,14 +1,31 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-
+import 'package:mercado_artesao/datas/product_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class HomeTab extends StatelessWidget {
+class HomeTab extends StatefulWidget {
+  
+  @override
+  HomeTabState createState() {
+    return new HomeTabState(); // there is no need of new here, we are already using Dart 2.0 +
+  }
+}
+
+class HomeTabState extends State<HomeTab> {
+
+  List<String> images;
+  List<ProductData> product;
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
+
   @override
   Widget build(BuildContext context) {
-
-
     return Stack(
       children: <Widget>[
         CustomScrollView(
@@ -16,48 +33,12 @@ class HomeTab extends StatelessWidget {
             SliverAppBar(
               floating: true,
               snap: true,
-              backgroundColor: Colors.blueAccent,
+              backgroundColor: Colors.lightBlue,
               elevation: 0.0,
               flexibleSpace: FlexibleSpaceBar(
                 title: const Text("Mercado Artesão"),
               ),
             ),
-            FutureBuilder<QuerySnapshot>(
-              future: Firestore.instance
-                  .collection("home").orderBy("pos").getDocuments(),
-              builder: (context, snapshot){
-                if(!snapshot.hasData)
-                  return SliverToBoxAdapter(
-                    child: Container(
-                      height: 200.0,
-                      alignment: Alignment.center,
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                      ),
-                    ),
-                  );
-                else
-                  return SliverStaggeredGrid.count(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 1.0,
-                    crossAxisSpacing: 1.0,
-                    staggeredTiles: snapshot.data.documents.map(
-                            (doc){
-                          return StaggeredTile.count(doc.data["x"], doc.data["y"]);
-                        }
-                    ).toList(),
-                    children: snapshot.data.documents.map(
-                            (doc){
-                          return FadeInImage.memoryNetwork(
-                            placeholder: kTransparentImage,
-                            image: doc.data["image"],
-                            fit: BoxFit.cover,
-                          );
-                        }
-                    ).toList(),
-                  );
-              },
-            )
           ],
         )
       ],

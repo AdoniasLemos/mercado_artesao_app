@@ -81,44 +81,48 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(
                     height: 16.0,
                   ),
-                  SizedBox(
-                    height: 44.0,
-                    child: FlatButton(
-                      child: Text(
-                        "Criar Conta",
-                        style: TextStyle(
-                          fontSize: 15.0,
+                  Row(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 44.0,
+                        child: FlatButton(
+                            child: Text(
+                              "VOLTAR",
+                              style: TextStyle(fontSize: 15.0),
+                            ),
+                            textColor: Colors.blueAccent,
+                            onPressed: () {
+                              Navigator.pop(context);
+                            }),
+                      ),
+                      SizedBox(
+                        height: 44.0,
+                        child: FlatButton(
+                          child: Text(
+                            "CRIAR CONTA",
+                            style: TextStyle(
+                              fontSize: 15.0,
+                            ),
+                          ),
+                          textColor: Colors.blueAccent,
+                          onPressed: () {
+                            if (_formKey.currentState.validate()) {
+                              Map<String, dynamic> userData = {
+                                "name": _nameController.text,
+                                "email": _emailController.text,
+                                "address": _addressController.text
+                              };
+
+                              model.signUp(
+                                  userData: userData,
+                                  pass: _passController.text,
+                                  onSuccess: _onSuccess,
+                                  onFail: _onFail);
+                            }
+                          },
                         ),
                       ),
-                      textColor: Colors.blueAccent,
-                      onPressed: () {
-                        if (_formKey.currentState.validate()) {
-                          Map<String, dynamic> userData = {
-                            "name": _nameController.text,
-                            "email": _emailController.text,
-                            "address": _addressController.text
-                          };
-
-                          model.signUp(
-                              userData: userData,
-                              pass: _passController.text,
-                              onSuccess: _onSuccess,
-                              onFail: _onFail);
-                        }
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 100.0,
-                    child: FlatButton(
-                        child: Text(
-                          "Voltar",
-                          style: TextStyle(fontSize: 15.0),
-                        ),
-                        textColor: Colors.blueAccent,
-                        onPressed: () {
-                          Navigator.pop(context);
-                        }),
+                    ],
                   ),
                 ],
               ),
