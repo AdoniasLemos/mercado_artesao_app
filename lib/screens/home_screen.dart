@@ -8,6 +8,7 @@ import 'package:mercado_artesao/widgets/cart_button.dart';
 
 class HomeScreen extends StatelessWidget {
   final _pageController = PageController();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,11 @@ class HomeScreen extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
         Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.lightBlue,
+            title: const Text("Mercado Artesão"),
+            centerTitle: true,
+          ),
           body: HomeTab(),
           drawer: CustomDrawer(_pageController),
           floatingActionButton: CartButton(),
@@ -23,7 +29,7 @@ class HomeScreen extends StatelessWidget {
         Scaffold(
           appBar: AppBar(
             title: Text("Categorias"),
-            backgroundColor: Colors.blueAccent,
+            backgroundColor: Colors.lightBlue,
             centerTitle: true,
           ),
           drawer: CustomDrawer(_pageController),
@@ -31,17 +37,35 @@ class HomeScreen extends StatelessWidget {
           floatingActionButton: CartButton(),
         ),
         Scaffold(
+          key: _scaffoldKey,
           appBar: AppBar(
-            backgroundColor: Colors.lightBlue,
-            title: Text('Minhas Vendas')
-            ,
+            backgroundColor: Colors.blueAccent[700],
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(
+                  Icons.notifications,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  _scaffoldKey.currentState.showSnackBar(SnackBar(
+                    content: Text('Não há nenhuma notificações'),
+                  ));
+                },
+              )
+            ],
+            title: Text(
+              'Minhas Vendas',
+              textAlign: TextAlign.center,
+            ),
+            centerTitle: true,
+            elevation: 0.0,
           ),
           body: PlacesTab(),
           drawer: CustomDrawer(_pageController),
         ),
         Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.blueAccent,
+            backgroundColor: Colors.lightBlue,
             title: Text("Meus Pedidos"),
             centerTitle: true,
           ),

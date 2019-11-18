@@ -43,7 +43,7 @@ class CustomDrawer extends StatelessWidget {
                       top: 8.0,
                       left: 0.0,
                       child: Text("Mercado\nArtesão",
-                        style: TextStyle(fontSize: 34.0, color: Colors.blueAccent, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 34.0, color: Colors.lightBlue[400], fontWeight: FontWeight.bold),
                       ),
                     ),
                     Positioned(
@@ -66,7 +66,7 @@ class CustomDrawer extends StatelessWidget {
                                     "Entre ou cadastre-se >"
                                         : "Sair",
                                     style: TextStyle(
-                                        color: Theme.of(context).primaryColor,
+                                        color: Colors.lightBlue[400],
                                         fontSize: 16.0,
                                         fontWeight: FontWeight.bold
                                     ),

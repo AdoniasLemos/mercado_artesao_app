@@ -10,6 +10,7 @@ class OrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.lightBlue,
         title: Text("Pedido Realizado"),
         centerTitle: true,
       ),

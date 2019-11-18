@@ -32,7 +32,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.lightBlue,
         title: Text(product.title),
         centerTitle: true,
       ),

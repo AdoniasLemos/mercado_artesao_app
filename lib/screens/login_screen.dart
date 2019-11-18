@@ -19,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Colors.lightBlue[400],
         body: ScopedModelDescendant<UserModel>(
           builder: (context, child, model) {
             if (model.isLoading)
@@ -32,12 +32,18 @@ class _LoginScreenState extends State<LoginScreen> {
               child: ListView(
                 padding: EdgeInsets.all(16.0),
                 children: <Widget>[
-                  SizedBox(
-                    height: 350.0,
+                  Container(
+                    height: MediaQuery.of(context).size.height / 3,
+                    width: 28.0,
+                    child: Image.asset('assets/logo.png'),
                   ),
                   TextFormField(
                     controller: _emailController,
-                    decoration: InputDecoration(hintText: "E-mail"),
+                    decoration: InputDecoration(
+                        labelText: "E-mail",
+                        labelStyle:
+                            TextStyle(color: Colors.white, fontSize: 16.0)),
+                    style: TextStyle(color: Colors.white, fontSize: 16.0),
                     keyboardType: TextInputType.emailAddress,
                     validator: (text) {
                       if (text.isEmpty || !text.contains("@"))
@@ -49,8 +55,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   TextFormField(
                     controller: _passController,
-                    decoration: InputDecoration(hintText: "Senha"),
+                    decoration: InputDecoration(
+                      labelText: "Senha",
+                      labelStyle:
+                          TextStyle(color: Colors.white, fontSize: 16.0),
+                    ),
                     obscureText: true,
+                    style: TextStyle(color: Colors.white, fontSize: 16.0),
                     validator: (text) {
                       if (text.isEmpty || text.length < 6)
                         return "Senha inválida!";
@@ -79,6 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text(
                         "Esqueci minha senha",
                         textAlign: TextAlign.right,
+                        style: TextStyle(color: Colors.white),
                       ),
                       padding: EdgeInsets.zero,
                     ),
@@ -86,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 16.0,
                   ),
-                  SizedBox(
+                  Container(
                     height: 44.0,
                     child: RaisedButton(
                       child: Text(
@@ -107,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                     ),
                   ),
-                  SizedBox(
+                  Container(
                     height: 50.0,
                     child: FlatButton(
                       child: Text(
@@ -115,10 +127,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(fontSize: 15.0),
                       ),
                       textColor: Colors.white,
-                      // onPressed: () {
-                      //   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      //       builder: (context) => SignUpScreen()));
-                      // },
                       onPressed: () {
                         Navigator.push(
                             context,
