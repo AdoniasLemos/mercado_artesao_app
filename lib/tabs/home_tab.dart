@@ -91,25 +91,25 @@ class HomeTabState extends State<HomeTab> {
           SizedBox(
             height: 20.0,
           ),
-          FutureBuilder<QuerySnapshot>(
-            future: Firestore.instance.collection("products").getDocuments(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData)
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              else {
-                return ListView(
-                  children: ListTile.divideTiles(
-                          tiles: snapshot.data.documents.map((doc) {
-                            return CategoryProductCarousel(doc);
-                          }).toList(),
-                          color: Colors.grey[500])
-                      .toList(),
-                );
-              }
-            },
-          )
+          // FutureBuilder<QuerySnapshot>(
+          //   future: Firestore.instance.collection("products").getDocuments(),
+          //   builder: (context, snapshot) {
+          //     if (!snapshot.hasData)
+          //       return Center(
+          //         child: CircularProgressIndicator(),
+          //       );
+          //     else {
+          //       return ListView(
+          //         children: ListTile.divideTiles(
+          //                 tiles: snapshot.data.documents.map((doc) {
+          //                   return CategoryProductCarousel(doc);
+          //                 }).toList(),
+          //                 color: Colors.grey[500])
+          //             .toList(),
+          //       );
+          //     }
+          //   },
+          // )
         ],
       ),
     ));
