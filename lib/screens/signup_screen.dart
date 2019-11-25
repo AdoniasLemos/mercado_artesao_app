@@ -22,6 +22,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.lightBlue),
+          elevation: 0.0,
+          backgroundColor: Colors.white,
+        ),
         body: ScopedModelDescendant<UserModel>(
           builder: (context, child, model) {
             if (model.isLoading)
@@ -35,7 +41,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 padding: EdgeInsets.all(16.0),
                 children: <Widget>[
                   SizedBox(
-                    height: 50.0,
+                    height: 10.0,
                   ),
                   TextFormField(
                     controller: _nameController,
@@ -79,7 +85,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
                   SizedBox(
-                    height: 16.0,
+                    height: 300.0,
                   ),
                   Row(
                     children: <Widget>[
@@ -90,7 +96,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               "VOLTAR",
                               style: TextStyle(fontSize: 15.0),
                             ),
-                            textColor: Colors.blueAccent,
+                            textColor: Colors.lightBlue,
                             onPressed: () {
                               Navigator.pop(context);
                             }),
@@ -104,7 +110,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               fontSize: 15.0,
                             ),
                           ),
-                          textColor: Colors.blueAccent,
+                          textColor: Colors.lightBlue,
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
                               Map<String, dynamic> userData = {

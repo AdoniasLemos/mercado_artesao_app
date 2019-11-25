@@ -75,23 +75,79 @@ class HomeTabState extends State<HomeTab> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: map<Widget>(
-              images, (index, url){
-                return Container(
-                  width: 10.0,
-                  height: 10.0,
-                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                  decoration: BoxDecoration(
+            children: map<Widget>(images, (index, url) {
+              return Container(
+                width: 10.0,
+                height: 10.0,
+                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: _current == index ? Colors.lightBlue : Colors.blueGrey[100]
-                  ),
+                    color: _current == index
+                        ? Colors.lightBlue
+                        : Colors.blueGrey[100]),
+              );
+            }),
+          ),
+          SizedBox(
+            height: 20.0,
+          ),
+          FutureBuilder<QuerySnapshot>(
+            future: Firestore.instance.collection("products").getDocuments(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData)
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              else {
+                return ListView(
+                  children: ListTile.divideTiles(
+                          tiles: snapshot.data.documents.map((doc) {
+                            return CategoryProductCarousel(doc);
+                          }).toList(),
+                          color: Colors.grey[500])
+                      .toList(),
                 );
               }
-            ),
-          ),
-          SizedBox(height: 20.0,)
+            },
+          )
         ],
       ),
     ));
+  }
+}
+
+class CategoryProductCarousel extends StatefulWidget {
+  final DocumentSnapshot snapshot;
+  CategoryProductCarousel(this.snapshot);
+
+  @override
+  _CategoryProductCarouselState createState() =>
+      _CategoryProductCarouselState(snapshot);
+}
+
+class _CategoryProductCarouselState extends State<CategoryProductCarousel> {
+  DocumentSnapshot snapshot;
+
+  _CategoryProductCarouselState(this.snapshot);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+
+      ),
+    );
+  }
+}
+
+class ProductCarousel extends StatefulWidget {
+  @override
+  _ProductCarouselState createState() => _ProductCarouselState();
+}
+
+class _ProductCarouselState extends State<ProductCarousel> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
